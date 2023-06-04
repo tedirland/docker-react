@@ -1,0 +1,13 @@
+FROM node:16-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+# Stephen says leave this in. If you decide to decoupe from Docker compose or you use this to build a prod
+# DF you will need this command
+# You don't really need it in dev since we are telling the docker-compose file to look in the fs on the local machine
+COPY . .
+
+CMD ["npm","run","start"]
+
